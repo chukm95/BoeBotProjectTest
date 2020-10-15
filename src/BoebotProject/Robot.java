@@ -3,6 +3,7 @@ package BoebotProject;
 import BoebotProject.Behaviors.*;
 import BoebotProject.Hardware.LineFollower;
 import BoebotProject.Hardware.Motor;
+import BoebotProject.Hardware.Ultrasoon;
 import TI.BoeBot;
 
 import javax.sound.midi.MidiChannel;
@@ -35,6 +36,8 @@ public class Robot {
     private LineFollower cLineFollower;
     private LineFollower rLineFollower;
 
+    private Ultrasoon ultraSoon;
+
     private ArrayList<Behavior> behaviorList;
     private Behavior currentBehavior;
 
@@ -64,6 +67,9 @@ public class Robot {
         lLineFollower = new LineFollower(2);
         cLineFollower = new LineFollower(1);
         rLineFollower = new LineFollower(3);
+
+        // ultrasoon sensor
+        ultraSoon = new Ultrasoon(0, 1);
 
         //start current behavior
         currentBehavior.OnStart();
@@ -104,6 +110,10 @@ public class Robot {
 
     public boolean GetLineFollower(int lineFollower){
         return lf_detections[lineFollower];
+    }
+
+    public Ultrasoon getUltraSoon() {
+        return ultraSoon;
     }
 
 

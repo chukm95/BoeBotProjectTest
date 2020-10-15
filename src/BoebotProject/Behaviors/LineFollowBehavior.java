@@ -8,23 +8,19 @@ import TI.BoeBot;
 
 public class LineFollowBehavior extends Behavior {
 
-    private final double ROLL_TIME = 0.15;
     private boolean hasDetectedIntersection;
     private double time;
-
 
     public LineFollowBehavior() {
         hasDetectedIntersection = false;
         time = 0;
     }
 
-
     @Override
     public void OnStart() {
         robot.SetSpeed(10);
 
     }
-
 
     @Override
     public void Update(double deltaTime) {
@@ -34,13 +30,12 @@ public class LineFollowBehavior extends Behavior {
             boolean mid = robot.GetLineFollower(Robot.MID_S);
             boolean right = robot.GetLineFollower(Robot.RIGHT_S);
 
-
             // if left sensor en right sensor do not detect black line
             if (left && right) {
                 System.out.println("left en right do not detect black line");
                 System.out.println("move forward....");
                 robot.SetSpeed(10);
-                //hasDetectedIntersection = true;
+                hasDetectedIntersection = true;
             }
             // if mid sensor detects black line
             else if (mid) {
@@ -59,10 +54,10 @@ public class LineFollowBehavior extends Behavior {
                 robot.SetTurnspeed(20);
                 System.out.println("right line detected");
                 System.out.println("adjusting to right....");
-            } else {
-                System.out.println("white surface detected.....");
+            }
+        else {
+                System.out.println("white detected, stop motor.....");
                 robot.SetSpeed(0);
-                //robot.NextBehavior();
         }
     }
 
@@ -72,3 +67,4 @@ public class LineFollowBehavior extends Behavior {
     }
 
 }
+
