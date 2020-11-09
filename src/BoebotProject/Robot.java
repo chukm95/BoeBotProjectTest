@@ -42,8 +42,7 @@ public class Robot {
     private Behavior currentBehavior;
 
 
-    private Robot()
-    {
+    private Robot() {
         instance = this;
 
         //currentBehavior = new IdleBehavior();//<<-- start gedrag
@@ -68,13 +67,14 @@ public class Robot {
         cLineFollower = new LineFollower(1);
         rLineFollower = new LineFollower(3);
 
-        // ultrasoon sensor
+        //ultrasoon sensor
         ultraSoon = new Ultrasoon(0, 1);
 
         //start current behavior
         currentBehavior.OnStart();
 
-        //loop
+
+        //loop line detection
         while(true)
         {
             lf_detections[LEFT_S] = lLineFollower.detectLine();
@@ -92,8 +92,8 @@ public class Robot {
             }
             //wacht 500 micro seconden
             BoeBot.wait(0, 500);
-        }
 
+        }
     }
 
 

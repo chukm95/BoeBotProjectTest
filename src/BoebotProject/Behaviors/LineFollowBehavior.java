@@ -30,9 +30,9 @@ public class LineFollowBehavior extends Behavior {
             boolean mid = robot.GetLineFollower(Robot.MID_S);
             boolean right = robot.GetLineFollower(Robot.RIGHT_S);
 
-            // if left sensor en right sensor do not detect black line
+            // if left sensor and right sensor do detect black line
             if (left && right) {
-                System.out.println("left en right do not detect black line");
+                System.out.println("left en right do detect black line");
                 System.out.println("move forward....");
                 robot.SetSpeed(10);
                 hasDetectedIntersection = true;
@@ -45,19 +45,20 @@ public class LineFollowBehavior extends Behavior {
 
             } // if left sensor detects black line
             else if (left && !mid) {
-                robot.SetTurnspeed(-20);
+                robot.SetTurnspeed(-20); // left
                 System.out.println("left line detected");
                 System.out.println("adjusting to left....");
 
             }// if right sensor detects black line
             else if (right && !mid) {
-                robot.SetTurnspeed(20);
+                robot.SetTurnspeed(20); // right
                 System.out.println("right line detected");
                 System.out.println("adjusting to right....");
             }
         else {
-                System.out.println("white detected, stop motor.....");
+                System.out.println("stop motor.....");
                 robot.SetSpeed(0);
+
         }
     }
 

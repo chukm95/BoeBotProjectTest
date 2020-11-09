@@ -3,11 +3,12 @@ package BoebotProject.Hardware;
 import TI.BoeBot;
 
 public class Ultrasoon {
-    // Ultrasoon HC-SR04
+    // Ultrasoon klasse HC-SR04
 
-    private int triggerPin;
-    private int echoPin;
-    private int distance;
+    private int triggerPin; //output triggerpin van hc-sr04 op pin 0
+    private int echoPin; //input echopin van hc-sr04 op pin 1
+    private int distance; //variabele voor de afstand tot de sensor
+    private int duration; //variabale voor de duur
 
     public Ultrasoon(int triggerPin, int echoPin) {
         this.triggerPin = triggerPin;
@@ -25,5 +26,23 @@ public class Ultrasoon {
 
     public int getDistance() {
         return distance;
+
     }
+
+    //calculating the distance from sensor to object
+    public void calculateDistance() {
+        BoeBot.digitalWrite(triggerPin, true);
+        BoeBot.wait(1);
+        BoeBot.digitalWrite(triggerPin, false);
+
+        this.duration = BoeBot.pulseIn(echoPin, true, 100000);
+        this.distance = (int) ((duration * 0.0343) / 2);
+
+        System.out.println("Distance: ");
+        System.out.println(distance);
+
+        BoeBot.wait(0, 500); // wacht 500 micro seconden
+    }
+
+
 }
