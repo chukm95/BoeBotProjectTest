@@ -93,6 +93,8 @@ public class Robot {
             //wacht 500 micro seconden
             BoeBot.wait(0, 500);
 
+            ultraSoon.calculateDistance();
+
         }
     }
 
