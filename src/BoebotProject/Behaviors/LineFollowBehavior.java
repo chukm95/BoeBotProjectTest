@@ -8,9 +8,11 @@ import TI.BoeBot;
 
 public class LineFollowBehavior extends Behavior {
 
+    private final double rollOutTime = 10; //after detecting an intersection keep driving for 10 seconds, 10 seconds is to much. change it.
+    
     private boolean hasDetectedIntersection;
     private double time;
-
+    
     public LineFollowBehavior() {
         hasDetectedIntersection = false;
         time = 0;
@@ -29,6 +31,20 @@ public class LineFollowBehavior extends Behavior {
             boolean left = robot.GetLineFollower(Robot.LEFT_S);
             boolean mid = robot.GetLineFollower(Robot.MID_S);
             boolean right = robot.GetLineFollower(Robot.RIGHT_S);
+        
+            //so we have detected an intersection now we need to drive X seconds forward
+            if(hasDetectedIntersection)
+            {
+                //only after we have detected the intersection we start counting time
+                time += deltaTime;
+                //check how much time has passed 
+                if(time >= rollOutTime)
+                {
+                    //we have rolled out so lets go to the next behavior
+                    robot.SetSpeed(0);
+                    //switch to??
+                }
+            }
 
             // if left sensor and right sensor do detect black line
             if (left && right) {
@@ -55,11 +71,14 @@ public class LineFollowBehavior extends Behavior {
                 System.out.println("right line detected");
                 System.out.println("adjusting to right....");
             }
+        // unreachable else 
+        /*        
         else {
                 System.out.println("stop motor.....");
                 robot.SetSpeed(0);
 
         }
+        */
     }
 
     @Override
